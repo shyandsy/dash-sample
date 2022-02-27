@@ -1,0 +1,39 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: test-k8s-ingress
+  annotations:
+# nginx.ingress.kubernetes.io/rewrite-target: /$1
+spec:
+  rules:
+    - host: "shyandsy.com"
+      http:
+        paths:
+        - path: /quality-bi/_dash-component-suites
+          pathType: Prefix
+          backend:
+            service:
+              name: test-k8s-service
+              port:
+                number: 80
+        - path: /_dash-dependencies
+          pathType: Prefix
+          backend:
+            service:
+              name: test-k8s-service
+              port:
+                number: 80
+        - path: /quality-bi/_dash-layout
+          pathType: Prefix
+          backend:
+            service:
+              name: test-k8s-service
+              port:
+                number: 80
+        - path: /quality-bi
+          pathType: ImplementationSpecific
+          backend:
+            service:
+              name: test-k8s-service
+              port:
+                number: 80

@@ -1,0 +1,18 @@
+{{- $svcPort := .Values.containerPort -}}
+{{- $fullName := include "default.fullname" . -}}
+{{- $svcName := .Values.serviceName  -}}
+apiVersion: v1
+kind: Pod
+metadata:
+  name: "{{ include "default.fullname" . }}-test-connection"
+  labels:
+    {{- include "default.labels" . | nindent 4 }}
+  annotations:
+    "helm.sh/hook": test
+spec:
+  containers:
+    - name: wget
+      image: busybox
+      command: ['wget']
+      args: ['{{ if $svcName }}{{ $svcName }}{{ else }}{{ $fullName }}-svc{{- end}}:{{ $svcPort }}']
+  restartPolicy: Never

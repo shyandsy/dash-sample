@@ -9,11 +9,12 @@ from dash import html
 import plotly.express as px
 import pandas as pd
 
+prefix = '/quality-bi/'
 external_stylesheets = [
     'https://codepen.io/chriddyp/pen/bWLwgP.css'
 ]
 
-app = dash.Dash(__name__, external_stylesheets=external_stylesheets)
+app = dash.Dash(__name__, external_stylesheets=external_stylesheets, url_base_pathname=prefix)
 server = app.server  # <== ADD THIS LINE
 # assume you have a "long-form" data frame
 # see https://plotly.com/python/px-arguments/ for more options
@@ -42,6 +43,6 @@ app.layout = html.Div(children=[
 ])
 
 if __name__ == '__main__':
-    # app.run_server(debug=True)  # <== THIS MAY NOT DEPLOY
-    # USE DIFFERENT ARGUMENTS FOR run_server METHOD
+    #app.run_server(debug=True)  # <== THIS MAY NOT DEPLOY
+    #USE DIFFERENT ARGUMENTS FOR run_server METHOD
     app.run_server(debug=True, host='0.0.0.0', port=8080)
