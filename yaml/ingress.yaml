@@ -9,7 +9,7 @@ spec:
     - host: "shyandsy.com"
       http:
         paths:
-        - path: /quality-bi/_dash-component-suites
+        - path: /_dash-component-suites
           pathType: Prefix
           backend:
             service:
@@ -23,7 +23,7 @@ spec:
               name: test-k8s-service
               port:
                 number: 80
-        - path: /quality-bi/_dash-layout
+        - path: /_dash-layout
           pathType: Prefix
           backend:
             service:
